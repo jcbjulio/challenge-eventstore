@@ -19,4 +19,9 @@ public class Event {
     public long timestamp() {
         return timestamp;
     }
+
+    public String toString() {
+        return type + "-" + timestamp;
+    }
+
 }
