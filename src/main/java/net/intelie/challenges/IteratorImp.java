@@ -10,7 +10,7 @@ public class IteratorImp implements EventIterator {
     String type;
     long startTime;
     long endTime;
-    int current;
+    int curPos = -1;
 
     public IteratorImp(String type, long startTime, long endTime, EventStoreImpl eventStore) {
         this.eventStore = eventStore;
@@ -22,18 +22,24 @@ public class IteratorImp implements EventIterator {
 
     @Override
     public boolean moveNext() {
-        return false;
+
+        if (eventList.iterator().hasNext())
+            curPos++;
+        return true;
     }
 
 
     @Override
     public Event current() {
-        return null;
+        {
+            return eventList.get(curPos);
+        }
     }
 
     @Override
     public void remove() {
 
+        eventList.remove(curPos);
 
     }
 

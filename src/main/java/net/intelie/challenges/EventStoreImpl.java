@@ -1,9 +1,8 @@
 package net.intelie.challenges;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Objects;
-import java.util.stream.Stream;
+
 
 public class EventStoreImpl implements EventStore {
 
@@ -30,6 +29,7 @@ public class EventStoreImpl implements EventStore {
     public EventIterator query(String type, long startTime, long endTime) {
 
         EventIterator iterator = new IteratorImp(type, startTime, endTime, this);
+
 
 //        Stream<Event> eventStream = eventList.stream().filter(event -> event.timestamp() >= startTime && event.timestamp() < endTime);
 
