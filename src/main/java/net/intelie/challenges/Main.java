@@ -1,11 +1,12 @@
 package net.intelie.challenges;
 
 import static net.intelie.challenges.EventStoreImpl.eventList;
+import static net.intelie.challenges.IteratorImp.qList;
 
 public class Main {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         EventStore eventStore = new EventStoreImpl();
 
@@ -32,17 +33,17 @@ public class Main {
 
         EventIterator iterator = eventStore.query("A", 1, 6);
 
-        System.out.println(eventList);
+        System.out.println(qList);
 
-        iterator.moveNext();
+        // iterator.moveNext(); dando index out of bound
 
-        System.out.println("Find and remove current event from: " + eventList);
+        System.out.println("Find and remove current event from: " + qList);
 
         System.out.println(iterator.current());
 
         iterator.remove();
 
-        System.out.println(eventList);
+        System.out.println(qList);
 
 
     }
