@@ -14,12 +14,12 @@ public class Main {
         eventStore.insert(new Event("B", 2L));
         eventStore.insert(new Event("C", 3L));
         eventStore.insert(new Event("D", 4L));
-        eventStore.insert(new Event("A", 4L));
         eventStore.insert(new Event("A", 5L));
-        eventStore.insert(new Event("C", 6L));
         eventStore.insert(new Event("A", 6L));
-        eventStore.insert(new Event("D", 6L));
-        eventStore.insert(new Event("A", 7L));
+        eventStore.insert(new Event("C", 7L));
+        eventStore.insert(new Event("A", 8L));
+        eventStore.insert(new Event("D", 9L));
+        eventStore.insert(new Event("A", 10L));
 
         System.out.println("Event List " + eventList);
 
@@ -29,15 +29,17 @@ public class Main {
 
         System.out.println("Event List " + eventList);
 
-        System.out.println("Query Events type A from 1 to 6");
+        System.out.println("Query Events type A from 1 to 10");
 
-        EventIterator iterator = eventStore.query("A", 1, 6);
+        EventIterator iterator = eventStore.query("A", 1, 10);
 
         System.out.println(qList);
 
-        // iterator.moveNext(); dando index out of bound
-
         System.out.println("Find and remove current event from: " + qList);
+
+        iterator.moveNext();
+        iterator.moveNext();
+        iterator.moveNext();
 
         System.out.println(iterator.current());
 

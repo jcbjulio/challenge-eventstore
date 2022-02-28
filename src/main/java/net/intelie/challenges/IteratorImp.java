@@ -15,7 +15,6 @@ public class IteratorImp implements EventIterator {
     long endTime;
     int curPos = 0;
     static List<Event> qList = new ArrayList<>();
-    Exception IllegalStateException = new Exception("End of List");
 
     public IteratorImp(String type, long startTime, long endTime, EventStoreImpl eventStore) {
         this.eventStore = eventStore;
@@ -29,26 +28,34 @@ public class IteratorImp implements EventIterator {
 
     @Override
     public boolean moveNext() {
-        while (curPos < qList.size())
+        if (curPos < qList.size()) {
             curPos++;
-        return false;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public Event current() {
-        return qList.get(curPos);
+        if (curPos < qList.size()) {
+            return qList.get(curPos);
+        } else
+            throw new IllegalStateException("End of List");
     }
 
     @Override
     public void remove() {
-
-        qList.remove(current());
-
+        if (curPos < qList.size()) {
+            qList.remove(curPos);
+        } else
+            throw new IllegalStateException("End of List");
     }
+
 
     @Override
     public void close() throws Exception {
-        if (!moveNext()) throw IllegalStateException;
+        IllegalStateException Exception = new IllegalStateException("End of List");
 
     }
 }
