@@ -1,6 +1,9 @@
 package net.intelie.challenges;
 
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static net.intelie.challenges.EventStoreImpl.eventList;
 
@@ -11,6 +14,8 @@ public class IteratorImp implements EventIterator {
     long startTime;
     long endTime;
     int curPos = -1;
+    public ArrayList<Event> eventStream;
+
 
     public IteratorImp(String type, long startTime, long endTime, EventStoreImpl eventStore) {
         this.eventStore = eventStore;
@@ -18,23 +23,23 @@ public class IteratorImp implements EventIterator {
         this.startTime = startTime;
         this.endTime = endTime;
 
+        eventList = (ArrayList<Event>) eventList.stream().filter(event -> event.type() == type
+                && event.timestamp() >= startTime
+                && event.timestamp() < endTime).collect(Collectors.toList());
     }
 
     @Override
     public boolean moveNext() {
-
-        if (eventList.iterator().hasNext())
-            curPos++;
-        return true;
+        if (eventList.iterator().hasNext()) curPos++;
+        return false;
     }
-
 
     @Override
     public Event current() {
-        {
-            return eventList.get(curPos);
-        }
+        return eventList.get(curPos);
+
     }
+
 
     @Override
     public void remove() {

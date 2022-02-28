@@ -2,11 +2,12 @@ package net.intelie.challenges;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 
 public class EventStoreImpl implements EventStore {
 
-    public static ArrayList<Event> eventList = new ArrayList<>();
+    static ArrayList<Event> eventList = new ArrayList<>();
 
     @Override
     public void insert(Event event) {
@@ -28,12 +29,8 @@ public class EventStoreImpl implements EventStore {
     @Override
     public EventIterator query(String type, long startTime, long endTime) {
 
-        EventIterator iterator = new IteratorImp(type, startTime, endTime, this);
-
-
-//        Stream<Event> eventStream = eventList.stream().filter(event -> event.timestamp() >= startTime && event.timestamp() < endTime);
-
-        return iterator;
+      //  Stream<Event> eventStream = eventList.stream().filter(event -> event.timestamp() >= startTime && event.timestamp() < endTime);
+        return new IteratorImp(type, startTime, endTime, this);
 
 
     }

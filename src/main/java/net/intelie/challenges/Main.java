@@ -26,15 +26,15 @@ public class Main {
 
         System.out.println("Event List " + eventList);
 
-        EventIterator iterator = eventStore.query("A", 1, 5);
+        EventIterator iterator = eventStore.query("A", 1, 7);
+
+        System.out.println(eventList);
 
         System.out.println("List has next: " + iterator.moveNext());
 
         System.out.println(iterator.current());
 
         System.out.println("Find and remove specific event from: " + eventList);
-
-        iterator.moveNext();
 
         System.out.println(iterator.current());
 
