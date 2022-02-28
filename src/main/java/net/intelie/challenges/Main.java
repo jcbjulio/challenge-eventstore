@@ -13,8 +13,10 @@ public class Main {
         eventStore.insert(new Event("B", 2L));
         eventStore.insert(new Event("C", 3L));
         eventStore.insert(new Event("D", 4L));
+        eventStore.insert(new Event("A", 4L));
         eventStore.insert(new Event("A", 5L));
         eventStore.insert(new Event("C", 6L));
+        eventStore.insert(new Event("A", 6L));
         eventStore.insert(new Event("D", 6L));
         eventStore.insert(new Event("A", 7L));
 
@@ -26,15 +28,15 @@ public class Main {
 
         System.out.println("Event List " + eventList);
 
-        EventIterator iterator = eventStore.query("A", 1, 7);
+        System.out.println("Query Events type A from 1 to 6");
+
+        EventIterator iterator = eventStore.query("A", 1, 6);
 
         System.out.println(eventList);
 
-        System.out.println("List has next: " + iterator.moveNext());
+        iterator.moveNext();
 
-        System.out.println(iterator.current());
-
-        System.out.println("Find and remove specific event from: " + eventList);
+        System.out.println("Find and remove current event from: " + eventList);
 
         System.out.println(iterator.current());
 
